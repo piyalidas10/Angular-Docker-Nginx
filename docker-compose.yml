@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  angular-app:
+    build: .
+    container_name: angular-crud-app
+    ports:
+      - "80:80"
+    restart: always
