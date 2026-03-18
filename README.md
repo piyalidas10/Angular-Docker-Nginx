@@ -21,6 +21,10 @@ http://localhost
 ## Changes needed
 **📁 ✅ 1. Add Dockerfile (ROOT)**
 
+Creating a basic docker image
+
+We will optimize the final image size by using a multi-stages build : one stage will rely on the stable nodejs official image (node:lts-slim) to generate the Angular final bundle and one stage will rely on the official nginx image (nginx:stable) to serve the Angular app files. Create a Dockerfile (no extension) and paste this content :
+
 Create a file named Dockerfile in your repo root:
 ```
 # -------- Stage 1: Build Angular --------
@@ -51,7 +55,6 @@ EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
 ```
-
 👉 🔴 IMPORTANT  
 If your dist folder is different, update this line:
 ```
