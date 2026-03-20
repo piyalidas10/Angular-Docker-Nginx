@@ -273,12 +273,14 @@ You have 2 scenarios:
   - ng serve OR basic static hosting
 - ❌ No compression
 - ❌ No caching
+Running in : http://localhost:4200/products/home
 
 **🟢 After**
 - Angular served via Nginx
 - ✅ Gzip/Brotli compression
 - ✅ Cache headers
 - ✅ Optimized delivery
+Running in : http://localhost/products/home
 
 **⚠️ Important Truth**
 
@@ -342,14 +344,15 @@ Run audit:
 
 📊 Your Results (Clean Comparison)
 ------------------------------------------------------------
-| Metric           | Angular (ng build / dev) | Nginx (Docker) | Improvement        |
-| ---------------- | ------------------------ | -------------- | ------------------ |
-| Requests         | 26                       | 9              | 🔥 ~65% fewer      |
-| Transferred      | 411 KB                   | 511 KB         | ⚠️ Slight increase |
-| Resources        | 3.3 MB                   | 1.1 MB         | 🔥 ~66% smaller    |
-| Finish Time      | 345 ms                   | 199 ms         | 🚀 ~42% faster     |
-| DOMContentLoaded | 294 ms                   | 150 ms         | 🚀 ~49% faster     |
-| Load Time        | 360 ms                   | 212 ms         | 🚀 ~41% faster     |
+| Metric           | Angular (old) | Nginx (optimized) | Improvement      |
+| ---------------- | ------------- | ----------------- | ---------------- |
+| Requests         | 26            | 9                 | 🔥 **-65%**      |
+| Transferred      | 411 KB        | 406 KB            | ✅ Slightly lower |
+| Resources        | 3.3 MB        | 1.1 MB            | 🔥 **-66%**      |
+| Finish           | 250 ms        | 137 ms            | 🚀 **-45%**      |
+| DOMContentLoaded | 193 ms        | 77 ms             | 🚀 **-60%**      |
+| Load             | 257 ms        | 144 ms            | 🚀 **-44%**      |
+
 
 **🔥 1. Huge Win: Resource Size ↓**
 ```
@@ -363,7 +366,7 @@ Run audit:
 
 **🚀 2. Load Time Almost Halved**
 ```
-360 ms → 212 ms
+257 ms → 144 ms
 ```
 👉 That’s real user impact:
 - Faster page load
@@ -377,17 +380,22 @@ Run audit:
 - Better bundling
 - Fewer round trips
 - Less network overhead
+- Less HTTP overhead
+- Better mobile performance
 
-**⚠️ 4. Why “Transferred” Increased?**
-```
-411 KB → 511 KB
-```
-👉 This looks weird but it’s normal:
+**🚀 4. Massive Rendering Improvement**
+DOMContentLoaded: 193 ms → 77 ms
 
-Possible reasons:
-- 🔹 A. Caching disabled in test
-First load downloads everything
-- 🔹 B. Compression not fully applied
+👉 ~60% faster UI rendering 
+👉 Users see content much quicker 
+
+**🎯 5. Compression is NOW Working**
+Transferred: 406 KB ≈ compressed size
+Resources: 1.1 MB ≈ actual size
+
+👉 This proves:
+- ✅ Gzip is active
+- ✅ Files compressed ~60–70%
 
 Check:
 ```
