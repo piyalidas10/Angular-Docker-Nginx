@@ -1,4 +1,4 @@
-# -------- Stage 1: Build Angular --------
+# -------- Build Stage --------
 FROM node:20-alpine AS build
 
 WORKDIR /app
@@ -10,17 +10,18 @@ COPY . .
 
 RUN npm run build -- --configuration production
 
-# -------- Stage 2: Nginx --------
+# -------- Nginx Stage --------
 FROM nginx:stable-alpine
 
-# Remove default config
-RUN rm -rf /etc/nginx/conf.d/*
+# 👉 /usr/share/nginx/html/ is inside the Docker container, NOT on your local machine.
+RUN rm -rf /usr/share/nginx/html/*
 
-# Copy custom nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy Angular build output
-COPY --from=build /app/dist/angular-crud /usr/share/nginx/html
+COPY --from=build /app/dist/angular-crud/browser/ /usr/share/nginx/html/
+
+# 🔥 IMPORTANT FIX
+RUN mv /usr/share/nginx/html/index.csr.html /usr/share/nginx/html/index.html
 
 EXPOSE 80
 

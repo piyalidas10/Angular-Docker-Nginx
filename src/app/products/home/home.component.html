@@ -1,0 +1,36 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of products; track $index) {
+      <tr>
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price | currency : "USD" }}</td>
+        <td>
+          <a class="btn btn-primary" [routerLink]="['/products/edit', item.id]"
+            >Edit</a
+          >
+          <button
+            type="button"
+            class="btn btn-danger mx-3"
+            (click)="deleteProduct(item.id)"
+          >
+            Remove
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  <div class="my-3">
+    <a class="btn btn-primary" routerLink="/products/create">Add Product</a>
+  </div>
+</div>

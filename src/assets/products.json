@@ -1,0 +1,14 @@
+{
+  "products": [
+    {
+      "id": "102",
+      "name": "Samsung Galaxy S24 Ultra",
+      "price": 1400
+    },
+    {
+      "id": "104",
+      "name": "ASUS ROG Strix G17 - RTX 4060",
+      "price": 1399
+    }
+  ]
+}
