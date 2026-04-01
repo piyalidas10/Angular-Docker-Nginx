@@ -1,6 +1,13 @@
 # Angular-Docker-Nginx
 Angular 19 + Docker + Nginx for improves Performance
 
+NGINX is a high-performance, open-source web server that is also widely used as a reverse proxy, load balancer, and content cache. It is a popular choice for powering modern, high-traffic applications due to its efficient, event-driven architecture.
+```
+Angular App → Build (dist/)
+            → Nginx (serve static files)
+            → Brotli + Gzip + Cache headers
+            → Browser (fast load ⚡)
+```
 ## 🏗️ What I am Doing
 ```
 Angular 19 → Docker build → Nginx serves app → Browser
